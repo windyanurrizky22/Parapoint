@@ -2,20 +2,16 @@
 
 namespace App\Filament\Resources\SchoolClasses;
 
-use App\Filament\Resources\SchoolClasses\Pages\ManageSchoolClasses;
+use App\Filament\Resources\SchoolClasses\Pages\CreateSchoolClass;
+use App\Filament\Resources\SchoolClasses\Pages\EditSchoolClass;
+use App\Filament\Resources\SchoolClasses\Pages\ListSchoolClasses;
+use App\Filament\Resources\SchoolClasses\Schemas\SchoolClassForm;
+use App\Filament\Resources\SchoolClasses\Tables\SchoolClassesTable;
 use App\Models\SchoolClass;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class SchoolClassResource extends Resource
@@ -26,61 +22,27 @@ class SchoolClassResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('class_student')
-                    ->required(),
-            ]);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                TextEntry::make('class_student'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-            ]);
+        return SchoolClassForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('class_student')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+        return SchoolClassesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ManageSchoolClasses::route('/'),
+            'index' => ListSchoolClasses::route('/'),
+            'create' => CreateSchoolClass::route('/create'),
+            'edit' => EditSchoolClass::route('/{record}/edit'),
         ];
     }
 }
