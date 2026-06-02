@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SchoolClasses\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 

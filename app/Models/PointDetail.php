@@ -11,20 +11,22 @@ class PointDetail extends Model
         'student_id',
         'teacher_id',
         'category_id',
-        'occurrence_number',
-        'amount',
-        'counted_point',
+        'initial_point',
+        'remaining_point',
     ];
 
-    public function student() {
+    public function student():BelongsTo
+    {
         return $this->belongsTo(Student::class, 'student_id');
     }
 
-    public function pointCategory() {
-        return $this->belongsTo(PointCategory::class, 'category_id');
+    public function teacher():BelongsTo
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
-    public function teacher() { 
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+    public function pointCategory():BelongsTo
+    {
+        return $this->belongsTo(PointCategory::class, 'category_id');
     }
 }
