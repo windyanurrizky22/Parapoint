@@ -11,4 +11,9 @@ class PointCategory extends Model
         'amount',
         'description',
     ];
+
+    public function pointDetail()
+    {
+        return $this->hasMany(PointDetail::class, 'category_id');
+    }
 }

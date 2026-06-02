@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    protected $table = 'teacher';
-    protected $fillable = ['teacher_name']; 
+     protected $fillable = ['teacher_name']; 
+
+        public function pointDetail()
+    {
+        return $this->hasMany(PointDetail::class);
+    }
 }

@@ -1,38 +1,39 @@
 <?php
 
-namespace App\Filament\Resources\Students\Tables;
+namespace App\Filament\Admin\Resources\PointCategories\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StudentsTable
+class PointCategoriesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('schoolClass.class_student')
-                    ->label('Kelas')
+                TextColumn::make('category_type')
+                    ->badge(),
+                TextColumn::make('amount')
+                    ->numeric()
                     ->sortable(),
-                TextColumn::make('nis')
-                    ->label('NIS')
+                TextColumn::make('created_at')
+                    ->dateTime()
                     ->sortable()
-                    ->searchable(),
-                TextColumn::make('name')
-                    ->label('Nama Siswa')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
                     ->sortable()
-                    ->searchable(), 
-                TextColumn::make('current_point')
-                    ->label('Poin saat ini')
-                    ->sortable(), 
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
