@@ -18,8 +18,8 @@ class StudentForm
                     ->required(),
                 Select::make('class_id')
                     ->relationship('schoolClass','class_student')
-                    ->required(),
-                    ->searchable()
+                    ->required()
+                    ->searchable(),  
             
                 
             ]);
