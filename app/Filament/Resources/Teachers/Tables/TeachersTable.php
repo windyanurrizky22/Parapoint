@@ -16,9 +16,14 @@ class TeachersTable
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->rowIndex(),
                 TextColumn::make('teacher_name')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('created_at')
+                    ->dateTime('d M y')
+                    ->sortable(),
             ])
             ->filters([
                 //

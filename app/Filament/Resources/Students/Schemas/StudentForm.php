@@ -12,14 +12,19 @@ class StudentForm
     {
         return $schema
             ->components(components: [
-                TextInput::make('nis')
-                    ->required(),
                 TextInput::make('name')
+                    ->required(),
+                TextInput::make('nis')
                     ->required(),
                 Select::make('class_id')
                     ->relationship('schoolClass','class_student')
                     ->required()
-                    ->searchable(),  
+                    ->preload()
+                    ->searchable(),
+                TextInput::make('current_point')
+                    ->numeric()
+                    ->default(150)
+                    ->required(),
             
                 
             ]);
