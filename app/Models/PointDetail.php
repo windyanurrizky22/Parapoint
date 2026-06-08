@@ -16,11 +16,18 @@ class PointDetail extends Model
         'counted_point',
     ];
 
-    public function student() {
+    public function student():BelongsTo
+    {
         return $this->belongsTo(Student::class, 'student_id');
     }
 
-    public function pointCategory() {
+    public function teacher():BelongsTo
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
+
+    public function pointCategory():BelongsTo
+    {
         return $this->belongsTo(PointCategory::class, 'category_id');
     }
 
