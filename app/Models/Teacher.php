@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-       protected $fillable = ['teacher_name']; 
+     protected $fillable = ['teacher_name']; 
 
-       public function pointDetail(){
-            return $this->hasMany(PointDetail::class, 'teacher_id');
-       }
+        public function pointDetail()
+    {
+        return $this->hasMany(PointDetail::class);
+    }
 }

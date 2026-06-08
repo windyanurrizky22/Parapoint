@@ -18,11 +18,14 @@ class PointCategoryForm
                         'subtract' => 'Pengurangan'
                     ])
                     ->required(),
+
                 TextInput::make('amount')
                     ->numeric()
                     ->required(),
+
                 TextInput::make('description')
-                    ->required(),
+                    ->required()
+                         
             ]);
     }
 }

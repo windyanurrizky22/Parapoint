@@ -9,9 +9,8 @@ class SchoolClass extends Model
 {
      protected $fillable = ['class_student'];
 
-      public function student() :HasMany
+     public function student()
     {
         return $this->hasMany(Student::class, 'class_id');
     }
-
 }

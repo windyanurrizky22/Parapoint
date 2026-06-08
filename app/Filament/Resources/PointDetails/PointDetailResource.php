@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\PointDetails;
 
+use App\Filament\Resources\PointDetails\Schemas\PointDetailForm;
 use App\Filament\Resources\PointDetails\Pages\CreatePointDetail;
 use App\Filament\Resources\PointDetails\Pages\EditPointDetail;
 use App\Filament\Resources\PointDetails\Pages\ListPointDetails;
-use App\Filament\Resources\PointDetails\Schemas\PointDetailForm;
 use App\Filament\Resources\PointDetails\Tables\PointDetailsTable;
 use App\Models\PointDetail;
 use BackedEnum;

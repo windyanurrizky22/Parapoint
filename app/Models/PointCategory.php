@@ -13,7 +13,8 @@ class PointCategory extends Model
         'description',
     ];
 
-    public function pointDetail(){
+    public function pointDetail()
+    {
         return $this->hasMany(PointDetail::class, 'category_id');
     }
 }

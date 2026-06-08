@@ -12,7 +12,11 @@ class SchoolClassForm
         return $schema
             ->components([
                 TextInput::make('class_student')
-                    ->required(),
+                    ->required()
+                    ->unique('school_classes','class_student',ignoreRecord: true)
+                    ->validationMessages([
+                    'unique' => 'Kelas ini sudah terdaftar, silakan gunakan nama lain.',
+                ]),
             ]);
     }
 }
