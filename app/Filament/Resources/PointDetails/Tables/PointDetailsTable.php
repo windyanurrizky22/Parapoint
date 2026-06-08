@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\PointDetails\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PointDetailsTable
@@ -14,33 +14,40 @@ class PointDetailsTable
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->rowIndex(),
+
                 TextColumn::make('student.name')
-                    ->label('Nama Siswa')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('student.schoolClass.class_student')
-                    ->label('Kelas')
-                    ->badge(),
-                TextColumn::make('pointCategory.description')
-                    ->label('Keterangan'),
+
                 TextColumn::make('teacher.teacher_name')
-                    ->label('Guru Pelapor'),
-                TextColumn::make('occurrence_number')
-                    ->label('Jumlah kejadian')
-                    ->badge(),
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('pointCategory.description')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('amount')
-                    ->label('Jumlah poin')
-                    ->badge(),
+                    ->alignCenter(),
+
+                TextColumn::make('occurrence_number')
+                    ->alignCenter(),
+
                 TextColumn::make('counted_point')
-                    ->label('Sisa poin')
-                    ->badge(),
+                    ->badge()
+                    ->color(fn ($state) => $state < 0 ? 'danger' : 'success')
+                    ->sortable(),
+
+                TextColumn::make('created_at')
+                    ->dateTime('d M Y H:i'),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteBulkAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

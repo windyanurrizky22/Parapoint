@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\SchoolClasses\Schemas;
 
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
 class SchoolClassForm
 {
@@ -12,8 +12,11 @@ class SchoolClassForm
         return $schema
             ->components([
                 TextInput::make('class_student')
-                        ->label('Nama Kelas')
-                        ->required()
+                    ->required()
+                    ->unique('school_classes','class_student',ignoreRecord: true)
+                    ->validationMessages([
+                    'unique' => 'Kelas ini sudah terdaftar, silakan gunakan nama lain.',
+                ]),
             ]);
     }
 }

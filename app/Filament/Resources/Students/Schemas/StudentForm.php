@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Students\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
 class StudentForm
 {
@@ -12,22 +12,24 @@ class StudentForm
     {
         return $schema
             ->components([
-                Select::make('class_id')
-                    ->label('Kelas')
-                    ->relationship('school_class','class_student')
-                    ->searchable()
-                    ->required(),
-                TextInput::make('nis')
-                    ->label('NIS')
-                    ->requied(),
                 TextInput::make('name')
-                    ->label('Nama Siswa')
-                    ->requied(),
+                    ->required(),
+
+                TextInput::make('nis')
+                    ->required()
+                    ->unique(ignoreRecord:true)
+                    ->numeric(),
+
+                Select::make('class_id')
+                    ->relationship('schoolClass','class_student')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+
                 TextInput::make('current_point')
-                    ->label('Poin saat ini')
                     ->numeric()
                     ->default(150)
-                    ->requied(),
+                    ->required(),
             ]);
     }
 }

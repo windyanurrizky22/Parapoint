@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Students\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class StudentsTable
@@ -14,26 +16,37 @@ class StudentsTable
     {
         return $table
             ->columns([
-                TextColumn::make('schoolClass.class_student')
-                    ->label('Kelas')
-                    ->sortable(),
+                TextColumn::make('id')
+                    ->sortable()
+                    ->rowIndex(),
+
                 TextColumn::make('nis')
-                    ->label('NIS')
                     ->sortable()
                     ->searchable(),
+
                 TextColumn::make('name')
-                    ->label('Nama Siswa')
                     ->sortable()
-                    ->searchable(), 
+                    ->searchable(),
+
+                TextColumn::make('schoolClass.class_student')
+                    ->sortable(),
+
                 TextColumn::make('current_point')
-                    ->label('Poin saat ini')
-                    ->sortable(), 
+                    ->badge()
+                    ->color(fn (int $state): string => match (true) {
+                        $state >= 150 => 'success',
+                        $state >= 100 => 'warning',
+                        default => 'danger',
+                    })
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
